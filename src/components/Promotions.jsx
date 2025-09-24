@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Gift, Star, Zap, Trophy } from 'lucide-react';
+import { Gift, Star, Trophy, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -9,7 +9,7 @@ const Promotions = ({ language }) => {
 
   const content = {
     th: {
-      title: 'โปรโมชั่นพิเศษ',
+      title: 'Special Offers',
       subtitle: 'รับโบนัสและสิทธิประโยชน์เพิ่มเติม',
       welcome: {
         title: 'โบนัสต้อนรับ 100%',
@@ -34,7 +34,7 @@ const Promotions = ({ language }) => {
       claimNow: 'รับโปรโมชั่น'
     },
     en: {
-      title: 'Special Promotions',
+      title: 'Special Offers',
       subtitle: 'Get bonuses and additional benefits',
       welcome: {
         title: '100% Welcome Bonus',
@@ -69,129 +69,287 @@ const Promotions = ({ language }) => {
   const t = content[language];
 
   const promotions = [
-    { icon: Gift, color: 'text-red-500 bg-red-500/20', buttonColor: 'bg-red-600 hover:bg-red-700', data: t.welcome, badge: '100%' },
-    { icon: Star, color: 'text-green-500 bg-green-500/20', buttonColor: 'bg-green-600 hover:bg-green-700', data: t.cashback, badge: '15%' },
-    { icon: Trophy, color: 'text-yellow-500 bg-yellow-500/20', buttonColor: 'bg-yellow-600 hover:bg-yellow-700', data: t.vip, badge: 'VIP' },
-    { icon: Zap, color: 'text-blue-500 bg-blue-500/20', buttonColor: 'bg-blue-600 hover:bg-blue-700', data: t.contest, badge: '$50K' }
+    { 
+      icon: Gift, 
+      color: 'text-red-500', 
+      bgColor: 'bg-gray-900',
+      badgeColor: 'bg-red-500',
+      badge: '100%',
+      data: t.welcome 
+    },
+    { 
+      icon: Star, 
+      color: 'text-green-500', 
+      bgColor: 'bg-gray-900',
+      badgeColor: 'bg-green-500',
+      badge: '15%',
+      data: t.cashback 
+    },
+    { 
+      icon: Trophy, 
+      color: 'text-yellow-500', 
+      bgColor: 'bg-gray-900',
+      badgeColor: 'bg-yellow-500',
+      badge: 'VIP',
+      data: t.vip 
+    },
+    { 
+      icon: Zap, 
+      color: 'text-blue-500', 
+      bgColor: 'bg-gray-900',
+      badgeColor: 'bg-blue-500',
+      badge: '$50K',
+      data: t.contest 
+    }
   ];
 
   return (
-    <section id="promotions" className="py-20 px-4 bg-gradient-to-b from-gray-900 via-black to-red-900 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 opacity-20">
-        {/* Grid Pattern */}
-        <div className="absolute inset-0">
-          <svg className="w-full h-full" viewBox="0 0 1200 800">
+    <section id="promotions" className="py-20 bg-white relative overflow-hidden">
+      {/* Professional Grid Background */}
+      <div className="absolute inset-0">
+        {/* Main Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.08]">
+          <svg className="w-full h-full" viewBox="0 0 100 100">
             <defs>
-              <pattern id="promoGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(220, 38, 38, 0.3)" strokeWidth="1"/>
+              <pattern id="mainGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5"/>
               </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#promoGrid)" />
+            <rect width="100%" height="100%" fill="url(#mainGrid)" className="text-red-400"/>
           </svg>
         </div>
 
-        {/* Floating Elements */}
-        {Array.from({ length: 8 }).map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ 
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              opacity: 0,
-              scale: 0
-            }}
-            animate={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              opacity: [0, 0.6, 0],
-              scale: [0, 1, 0],
-              rotate: [0, 360]
-            }}
-            transition={{
-              duration: 8 + Math.random() * 4,
-              repeat: Infinity,
-              delay: Math.random() * 3,
-              ease: "linear"
-            }}
-            className="absolute"
-            style={{
-              width: Math.random() * 20 + 10,
-              height: Math.random() * 20 + 10,
-              background: i % 2 === 0 ? 'rgba(220, 38, 38, 0.4)' : 'rgba(16, 185, 129, 0.4)',
-              clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)'
-            }}
-          />
-        ))}
+        {/* Secondary Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.04]">
+          <svg className="w-full h-full" viewBox="0 0 50 50">
+            <defs>
+              <pattern id="secondaryGrid" width="50" height="50" patternUnits="userSpaceOnUse">
+                <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" strokeWidth="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#secondaryGrid)" className="text-red-500"/>
+          </svg>
+        </div>
 
-        {/* Gradient Orbs */}
+        {/* Floating Triangular Shapes */}
         <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.2 }}
-          transition={{ duration: 2, delay: 1 }}
-          className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-r from-red-500 to-red-700 rounded-full blur-xl"
+          animate={{ 
+            y: [0, -20, 0],
+            rotate: [0, 180, 360]
+          }}
+          transition={{ 
+            duration: 12, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+          className="absolute top-20 left-20 w-0 h-0 border-l-[8px] border-r-[8px] border-b-[12px] border-l-transparent border-r-transparent border-b-red-400/30"
         />
+        
         <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.2 }}
-          transition={{ duration: 2, delay: 1.5 }}
-          className="absolute bottom-20 left-20 w-24 h-24 bg-gradient-to-r from-green-500 to-green-700 rounded-full blur-xl"
+          animate={{ 
+            y: [0, 15, 0],
+            rotate: [0, -180, -360]
+          }}
+          transition={{ 
+            duration: 10, 
+            repeat: Infinity, 
+            ease: "easeInOut",
+            delay: 3
+          }}
+          className="absolute top-40 right-32 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[10px] border-l-transparent border-r-transparent border-b-red-500/30"
         />
+        
+        <motion.div
+          animate={{ 
+            y: [0, -12, 0],
+            rotate: [0, 90, 180, 270, 360]
+          }}
+          transition={{ 
+            duration: 15, 
+            repeat: Infinity, 
+            ease: "easeInOut",
+            delay: 6
+          }}
+          className="absolute bottom-32 left-40 w-0 h-0 border-l-[4px] border-r-[4px] border-b-[8px] border-l-transparent border-r-transparent border-b-red-400/25"
+        />
+
+        {/* Floating Green Triangular Shapes */}
+        <motion.div
+          animate={{ 
+            y: [0, 18, 0],
+            rotate: [0, -90, -180, -270, -360]
+          }}
+          transition={{ 
+            duration: 14, 
+            repeat: Infinity, 
+            ease: "easeInOut",
+            delay: 2
+          }}
+          className="absolute top-60 right-20 w-0 h-0 border-l-[7px] border-r-[7px] border-b-[11px] border-l-transparent border-r-transparent border-b-green-400/30"
+        />
+        
+        <motion.div
+          animate={{ 
+            y: [0, -16, 0],
+            rotate: [0, 45, 90, 135, 180, 225, 270, 315, 360]
+          }}
+          transition={{ 
+            duration: 18, 
+            repeat: Infinity, 
+            ease: "easeInOut",
+            delay: 8
+          }}
+          className="absolute bottom-20 right-40 w-0 h-0 border-l-[5px] border-r-[5px] border-b-[9px] border-l-transparent border-r-transparent border-b-green-500/25"
+        />
+
+        {/* Subtle Grid Overlay */}
+        <div className="absolute inset-0 opacity-[0.02]">
+          <svg className="w-full h-full" viewBox="0 0 200 200">
+            <defs>
+              <pattern id="overlayGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.3"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#overlayGrid)" className="text-red-300"/>
+          </svg>
+        </div>
       </div>
 
-      <div className="container mx-auto relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">{t.title}</h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">{t.subtitle}</p>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center px-4 py-2 bg-red-100 rounded-full text-red-600 text-sm font-medium mb-6 border border-red-200"
+          >
+            {t.title}
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"
+          >
+            {t.subtitle}
+          </motion.h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Modern Premium Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {promotions.map((promo, index) => {
             const Icon = promo.icon;
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-600/30 hover:border-red-500/40 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden flex flex-col group"
+                className="relative group cursor-pointer"
               >
-                <div className={`absolute top-4 right-4 ${promo.buttonColor} text-white px-3 py-1 rounded-full text-sm font-bold`}>
-                  {promo.badge}
-                </div>
-                
-                <div className={`w-14 h-14 ${promo.color} rounded-xl flex items-center justify-center mb-4 border border-gray-600/20`}>
-                  <Icon className="w-7 h-7" />
-                </div>
-                
-                <h3 className="text-xl font-bold text-white mb-2">{promo.data.title}</h3>
-                <p className="text-gray-300 mb-4 text-sm flex-grow">{promo.data.description}</p>
-                
-                <ul className="space-y-1 mb-6">
-                  {promo.data.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-gray-300 text-sm">
-                      <div className="w-1.5 h-1.5 bg-red-500 rounded-full mr-2"></div>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                
-                <Button 
-                  onClick={handleClaim}
-                  className={`w-full ${promo.buttonColor} text-white transition-all duration-300 mt-auto hover:scale-105`}
-                >
-                  {t.claimNow}
-                </Button>
+                {/* Modern Card Design */}
+                <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 group-hover:border-gray-200 h-[480px] flex flex-col">
+                  {/* Premium Badge */}
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                    <div className={`px-4 py-1 rounded-full text-xs font-bold text-white shadow-lg ${
+                      index === 0 ? 'bg-gradient-to-r from-red-500 to-red-600' :
+                      index === 1 ? 'bg-gradient-to-r from-green-500 to-green-600' :
+                      index === 2 ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
+                      'bg-gradient-to-r from-blue-500 to-blue-600'
+                    }`}>
+                      {promo.badge}
+                    </div>
+                  </div>
 
-                {/* Hover Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                  {/* Icon with Modern Design */}
+                  <div className="flex justify-center mb-6 mt-4">
+                    <div className={`relative p-4 rounded-2xl shadow-lg ${
+                      index === 0 ? 'bg-gradient-to-br from-red-50 to-red-100' :
+                      index === 1 ? 'bg-gradient-to-br from-green-50 to-green-100' :
+                      index === 2 ? 'bg-gradient-to-br from-yellow-50 to-yellow-100' :
+                      'bg-gradient-to-br from-blue-50 to-blue-100'
+                    }`}>
+                      <Icon className={`w-8 h-8 ${
+                        index === 0 ? 'text-red-600' :
+                        index === 1 ? 'text-green-600' :
+                        index === 2 ? 'text-yellow-600' :
+                        'text-blue-600'
+                      }`} />
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 flex flex-col text-center">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                      {promo.data.title}
+                    </h3>
+                    
+                    <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 ${
+                      index === 0 ? 'bg-red-100 text-red-700' :
+                      index === 1 ? 'bg-green-100 text-green-700' :
+                      index === 2 ? 'bg-yellow-100 text-yellow-700' :
+                      'bg-blue-100 text-blue-700'
+                    }`}>
+                      {index === 0 ? 'PREMIUM STATUS' :
+                       index === 1 ? 'DAILY REWARDS' :
+                       index === 2 ? 'VIP EXCLUSIVE' :
+                       'CONTEST PRIZE'}
+                    </div>
+
+                    <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-1">
+                      {promo.data.description}
+                    </p>
+
+                    {/* Features */}
+                    <div className="mb-6">
+                      {promo.data.features.map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-center justify-center text-gray-700 text-sm mb-2">
+                          <div className={`w-1.5 h-1.5 rounded-full mr-3 ${
+                            index === 0 ? 'bg-red-500' :
+                            index === 1 ? 'bg-green-500' :
+                            index === 2 ? 'bg-yellow-500' :
+                            'bg-blue-500'
+                          }`}></div>
+                          {feature}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Modern CTA Button */}
+                  <div className="mt-auto">
+                    <Button 
+                      onClick={handleClaim}
+                      className={`w-full text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+                        index === 0 ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700' :
+                        index === 1 ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700' :
+                        index === 2 ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700' :
+                        'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700'
+                      }`}
+                    >
+                      {t.claimNow}
+                    </Button>
+                  </div>
+
+                  {/* Subtle Hover Effect */}
+                  <div className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-5 transition-opacity duration-500 ${
+                    index === 0 ? 'bg-red-500' :
+                    index === 1 ? 'bg-green-500' :
+                    index === 2 ? 'bg-yellow-500' :
+                    'bg-blue-500'
+                  }`}></div>
+                </div>
               </motion.div>
             );
           })}

@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 import { Menu, X, Globe, Download, User, BookOpen, TrendingUp, Gift, Phone, Users, Copy, FileText, Shield, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
-import logo from '@/assets/logo.png';
+import { Link } from 'react-router-dom';
+import logo from '@/assets/logo2.png';
 
 const Header = ({ language, toggleLanguage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,18 +45,37 @@ const Header = ({ language, toggleLanguage }) => {
     }
   };
 
-  const handleMT4Click = () => {
-    toast({
-      title: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-    });
+  const handleSignUp = () => {
+    window.open('https://client.rubyfxtrade.com/register/trader', '_blank');
   };
 
-  const handleMenuClick = (item) => {
-    toast({
-      title: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-    });
-    setIsMenuOpen(false);
+  const handleLogin = () => {
+    window.open('https://client.rubyfxtrade.com/login', '_blank');
   };
+
+  const handleDownload = () => {
+    // Detect device type
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // For mobile, redirect to app stores
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      if (isIOS) {
+        window.open('https://apps.apple.com/app/metatrader-5/id413251709', '_blank');
+      } else {
+        window.open('https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5', '_blank');
+      }
+    } else {
+      // For PC, show download through browser
+      toast({
+        title: "💻 Download MT5",
+        description: "MT5 will be downloaded through your browser"
+      });
+      // You can add actual download link here
+      window.open('https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5setup.exe', '_blank');
+    }
+  };
+
 
   const t = content[language];
 
@@ -64,101 +84,84 @@ const Header = ({ language, toggleLanguage }) => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-red-500/20"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm"
     >
-      <div className="container mx-auto px-4 py-2">
+      <div className="container mx-auto px-6 py-1">
         <div className="flex items-center justify-between">
           <motion.div 
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.02 }}
             className="flex items-center"
           >
             <img 
               src={logo} 
-              alt="ForexPro Logo" 
+              alt="RubyFX Logo" 
               className="w-20 h-20 object-contain"
             />
           </motion.div>
 
-          <nav className="hidden lg:flex items-center space-x-8">
-            <motion.button 
-              onClick={() => handleMenuClick('products')} 
-              className="text-gray-300 hover:text-red-500 transition-all duration-300 flex items-center space-x-2 group relative"
-              whileHover={{ scale: 1.05 }}
-            >
-              <TrendingUp className="w-4 h-4 group-hover:text-red-500 transition-colors" />
-              <span className="font-medium tracking-wide">{t.products}</span>
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 group-hover:w-full transition-all duration-300"></div>
-            </motion.button>
-            <motion.button 
-              onClick={() => handleMenuClick('promotions')} 
-              className="text-gray-300 hover:text-red-500 transition-all duration-300 flex items-center space-x-2 group relative"
-              whileHover={{ scale: 1.05 }}
-            >
-              <Gift className="w-4 h-4 group-hover:text-red-500 transition-colors" />
-              <span className="font-medium tracking-wide">{t.promotions}</span>
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 group-hover:w-full transition-all duration-300"></div>
-            </motion.button>
-            <motion.button 
-              onClick={() => handleMenuClick('education')} 
-              className="text-gray-300 hover:text-red-500 transition-all duration-300 flex items-center space-x-2 group relative"
-              whileHover={{ scale: 1.05 }}
-            >
-              <BookOpen className="w-4 h-4 group-hover:text-red-500 transition-colors" />
-              <span className="font-medium tracking-wide">{t.education}</span>
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 group-hover:w-full transition-all duration-300"></div>
-            </motion.button>
-            <motion.button 
-              onClick={() => handleMenuClick('news')} 
-              className="text-gray-300 hover:text-red-500 transition-all duration-300 group relative"
-              whileHover={{ scale: 1.05 }}
-            >
-              <span className="font-medium tracking-wide">{t.news}</span>
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 group-hover:w-full transition-all duration-300"></div>
-            </motion.button>
-            <motion.button 
-              onClick={() => handleMenuClick('about')} 
-              className="text-gray-300 hover:text-red-500 transition-all duration-300 group relative"
-              whileHover={{ scale: 1.05 }}
-            >
-              <span className="font-medium tracking-wide">{t.about}</span>
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 group-hover:w-full transition-all duration-300"></div>
-            </motion.button>
-            <motion.button 
-              onClick={() => handleMenuClick('contact')} 
-              className="text-gray-300 hover:text-red-500 transition-all duration-300 flex items-center space-x-2 group relative"
-              whileHover={{ scale: 1.05 }}
-            >
-              <Phone className="w-4 h-4 group-hover:text-red-500 transition-colors" />
-              <span className="font-medium tracking-wide">{t.contact}</span>
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 group-hover:w-full transition-all duration-300"></div>
-            </motion.button>
+          <nav className="hidden lg:flex items-center space-x-6">
+            <Link to="/products">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-sm"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.products}
+              </motion.button>
+            </Link>
+            <Link to="/promotions">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-sm"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.promotions}
+              </motion.button>
+            </Link>
+            <Link to="/news">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-sm"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.news}
+              </motion.button>
+            </Link>
+            <Link to="/ib-program">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-sm"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.ib}
+              </motion.button>
+            </Link>
           </nav>
 
-          <div className="hidden lg:flex items-center space-x-4">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <div className="hidden lg:flex items-center space-x-3">
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button 
-                onClick={handleMT4Click} 
+                onClick={handleDownload} 
                 variant="outline" 
-                className="border-red-500/50 text-red-400 hover:bg-red-500/10 hover:border-red-500 hover:text-red-400 backdrop-blur-sm transition-all duration-300"
+                size="sm"
+                className="border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-full"
               >
-                <Download className="w-4 h-4 mr-2" />
+                <Download className="w-4 h-4 mr-1" />
                 {t.download}
               </Button>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button 
-                onClick={handleMT4Click} 
+                onClick={handleLogin} 
                 variant="ghost" 
-                className="text-gray-300 hover:bg-red-500/10 hover:text-red-400 transition-all duration-300"
+                size="sm"
+                className="text-gray-600 hover:bg-gray-100 transition-colors duration-200"
               >
-                <User className="w-4 h-4 mr-2" />
+                <User className="w-4 h-4 mr-1" />
                 {t.login}
               </Button>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button 
-                onClick={handleMT4Click} 
-                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white transition-all duration-300"
+                onClick={handleSignUp} 
+                size="sm"
+                className="bg-red-600 hover:bg-red-700 text-white transition-colors duration-200 rounded-full"
               >
                 {t.signUp}
               </Button>
@@ -168,7 +171,7 @@ const Header = ({ language, toggleLanguage }) => {
                 onClick={toggleLanguage} 
                 variant="ghost" 
                 size="icon" 
-                className="text-gray-300 hover:bg-red-500/10 hover:text-red-400 transition-all duration-300"
+                className="text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-all duration-300"
               >
                 <Globe className="w-5 h-5" />
               </Button>
@@ -181,7 +184,7 @@ const Header = ({ language, toggleLanguage }) => {
                 onClick={toggleLanguage} 
                 variant="ghost" 
                 size="icon" 
-                className="text-gray-300 hover:bg-red-500/10 hover:text-red-400 transition-all duration-300"
+                className="text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-all duration-300"
               >
                 <Globe className="w-5 h-5" />
               </Button>
@@ -191,7 +194,7 @@ const Header = ({ language, toggleLanguage }) => {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 variant="ghost" 
                 size="icon"
-                className="text-gray-300 hover:bg-red-500/10 hover:text-red-400 transition-all duration-300"
+                className="text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-all duration-300"
               >
                 {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </Button>
@@ -204,68 +207,48 @@ const Header = ({ language, toggleLanguage }) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden mt-4 pb-4 border-t border-red-500/20 bg-black/10 backdrop-blur-sm"
+            className="lg:hidden mt-4 pb-4 border-t border-gray-200 bg-white"
           >
             <div className="flex flex-col space-y-2 mt-4">
-              <Button onClick={handleMT4Click} className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white w-full justify-start p-3">
+              <Button onClick={handleSignUp} className="bg-red-600 hover:bg-red-700 text-white w-full justify-start p-3 rounded-full">
                 {t.signUp}
               </Button>
-              <Button onClick={handleMT4Click} variant="outline" className="border-red-500/50 text-red-400 hover:bg-red-500/10 w-full justify-start p-3">
+              <Button onClick={handleLogin} variant="outline" className="border-gray-300 text-gray-600 hover:bg-gray-100 w-full justify-start p-3 rounded-full">
                 <User className="w-4 h-4 mr-2" />
                 {t.login}
               </Button>
-              <Button onClick={handleMT4Click} variant="ghost" className="text-gray-300 hover:text-red-400 hover:bg-red-500/10 justify-start p-3">
+              <Button onClick={handleDownload} variant="ghost" className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 justify-start p-3 rounded-full">
                 <Download className="w-4 h-4 mr-2" />
                 {t.download}
               </Button>
-              <button onClick={() => handleMenuClick('products')} className="text-gray-300 text-left py-3 hover:text-red-400 hover:bg-red-500/10 flex items-center transition-all duration-300">
-                <TrendingUp className="w-4 h-4 mr-2" />
-                {t.products}
-              </button>
-              <button onClick={() => handleMenuClick('promotions')} className="text-gray-300 text-left py-3 hover:text-red-400 hover:bg-red-500/10 flex items-center transition-all duration-300">
-                <Gift className="w-4 h-4 mr-2" />
-                {t.promotions}
-              </button>
-              <button onClick={() => handleMenuClick('education')} className="text-gray-300 text-left py-3 hover:text-red-400 hover:bg-red-500/10 flex items-center transition-all duration-300">
-                <BookOpen className="w-4 h-4 mr-2" />
-                {t.education}
-              </button>
-              <button onClick={() => handleMenuClick('news')} className="text-gray-300 text-left py-3 hover:text-red-400 hover:bg-red-500/10 transition-all duration-300">
-                {t.news}
-              </button>
-              <button onClick={() => handleMenuClick('ib')} className="text-gray-300 text-left py-3 hover:text-red-400 hover:bg-red-500/10 flex items-center transition-all duration-300">
-                <Users className="w-4 h-4 mr-2" />
-                {t.ib}
-              </button>
-              <button onClick={() => handleMenuClick('copyTrading')} className="text-gray-300 text-left py-3 hover:text-red-400 hover:bg-red-500/10 flex items-center transition-all duration-300">
-                <Copy className="w-4 h-4 mr-2" />
-                {t.copyTrading}
-              </button>
-              <button onClick={() => handleMenuClick('about')} className="text-gray-300 text-left py-3 hover:text-red-400 hover:bg-red-500/10 transition-all duration-300">
-                {t.about}
-              </button>
-              <button onClick={() => handleMenuClick('contact')} className="text-gray-300 text-left py-3 hover:text-red-400 hover:bg-red-500/10 flex items-center transition-all duration-300">
-                <Phone className="w-4 h-4 mr-2" />
-                {t.contact}
-              </button>
-              <div className="border-t border-red-500/20 pt-4 mt-2">
-                <button onClick={() => handleMenuClick('terms')} className="text-gray-400 text-left py-2 hover:text-red-400 hover:bg-red-500/10 flex items-center text-sm transition-all duration-300">
-                  <FileText className="w-4 h-4 mr-2" />
-                  {t.terms}
+              <Link to="/products" onClick={() => setIsMenuOpen(false)}>
+                <button className="text-gray-600 text-left py-3 hover:text-red-600 hover:bg-red-50 flex items-center transition-all duration-300 w-full">
+                  <TrendingUp className="w-4 h-4 mr-2" />
+                  {t.products}
                 </button>
-                <button onClick={() => handleMenuClick('privacy')} className="text-gray-400 text-left py-2 hover:text-red-400 hover:bg-red-500/10 flex items-center text-sm transition-all duration-300">
-                  <Eye className="w-4 h-4 mr-2" />
-                  {t.privacy}
+              </Link>
+              <Link to="/promotions" onClick={() => setIsMenuOpen(false)}>
+                <button className="text-gray-600 text-left py-3 hover:text-red-600 hover:bg-red-50 flex items-center transition-all duration-300 w-full">
+                  <Gift className="w-4 h-4 mr-2" />
+                  {t.promotions}
                 </button>
-                <button onClick={() => handleMenuClick('aml')} className="text-gray-400 text-left py-2 hover:text-red-400 hover:bg-red-500/10 flex items-center text-sm transition-all duration-300">
-                  <Shield className="w-4 h-4 mr-2" />
-                  {t.aml}
+              </Link>
+              <Link to="/news" onClick={() => setIsMenuOpen(false)}>
+                <button className="text-gray-600 text-left py-3 hover:text-red-600 hover:bg-red-50 transition-all duration-300 w-full">
+                  {t.news}
                 </button>
-              </div>
+              </Link>
+              <Link to="/ib-program" onClick={() => setIsMenuOpen(false)}>
+                <button className="text-gray-600 text-left py-3 hover:text-red-600 hover:bg-red-50 flex items-center transition-all duration-300 w-full">
+                  <Users className="w-4 h-4 mr-2" />
+                  {t.ib}
+                </button>
+              </Link>
             </div>
           </motion.div>
         )}
       </div>
+
     </motion.header>
   );
 };

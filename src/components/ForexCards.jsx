@@ -222,145 +222,37 @@ const ForexCards = ({ language }) => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-red-900 via-black to-gray-900 relative overflow-hidden">
-      {/* Animated Background Pattern */}
-      <div className="absolute inset-0 opacity-20">
-        {/* Grid Pattern */}
-        <div className="absolute inset-0">
-          <svg className="w-full h-full" viewBox="0 0 1200 800">
+    <section className="py-20 bg-gray-50 relative overflow-hidden">
+      {/* Clean Background */}
+      <div className="absolute inset-0">
+        {/* Subtle Pattern */}
+        <div className="absolute inset-0 opacity-[0.02]">
+          <svg className="w-full h-full" viewBox="0 0 60 60">
             <defs>
-              <pattern id="forexGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(220, 38, 38, 0.3)" strokeWidth="1"/>
+              <pattern id="forexGrid" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="currentColor" strokeWidth="0.5"/>
               </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#forexGrid)" />
+            <rect width="100%" height="100%" fill="url(#forexGrid)" className="text-gray-400"/>
           </svg>
         </div>
-
-        {/* Floating Trading Elements */}
-        {Array.from({ length: 12 }).map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ 
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              opacity: 0,
-              scale: 0
-            }}
-            animate={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              opacity: [0, 0.6, 0],
-              scale: [0, 1, 0],
-              rotate: [0, 360]
-            }}
-            transition={{
-              duration: 8 + Math.random() * 4,
-              repeat: Infinity,
-              delay: Math.random() * 3,
-              ease: "linear"
-            }}
-            className="absolute"
-            style={{
-              width: Math.random() * 20 + 10,
-              height: Math.random() * 20 + 10,
-              background: i % 3 === 0 ? 'rgba(220, 38, 38, 0.4)' : 'rgba(16, 185, 129, 0.4)',
-              clipPath: i % 2 === 0 ? 'polygon(50% 0%, 0% 100%, 100% 100%)' : 'polygon(0% 0%, 100% 0%, 50% 100%)'
-            }}
-          />
-        ))}
-
-        {/* Animated Chart Lines */}
-        <motion.div
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
-          className="absolute inset-0"
-        >
-          <svg className="w-full h-full" viewBox="0 0 1200 800">
-            <motion.path
-              d="M 0,200 Q 300,150 600,180 T 1200,160"
-              fill="none"
-              stroke="rgba(220, 38, 38, 0.5)"
-              strokeWidth="2"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
-            />
-            <motion.path
-              d="M 0,400 Q 300,350 600,380 T 1200,360"
-              fill="none"
-              stroke="rgba(16, 185, 129, 0.5)"
-              strokeWidth="2"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 5, repeat: Infinity, repeatType: "reverse", delay: 1 }}
-            />
-            <motion.path
-              d="M 0,600 Q 300,550 600,580 T 1200,560"
-              fill="none"
-              stroke="rgba(220, 38, 38, 0.4)"
-              strokeWidth="2"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 6, repeat: Infinity, repeatType: "reverse", delay: 2 }}
-            />
-          </svg>
-        </motion.div>
-
-        {/* Floating Particles */}
-        {Array.from({ length: 20 }).map((_, i) => (
-          <motion.div
-            key={`particle-${i}`}
-            initial={{ 
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              opacity: 0
-            }}
-            animate={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              opacity: [0, 0.8, 0]
-            }}
-            transition={{
-              duration: 6 + Math.random() * 4,
-              repeat: Infinity,
-              delay: Math.random() * 2
-            }}
-            className="absolute w-1 h-1 bg-red-500 rounded-full"
-          />
-        ))}
-
-        {/* Gradient Orbs */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.2 }}
-          transition={{ duration: 2, delay: 1 }}
-          className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-r from-red-500 to-red-700 rounded-full blur-xl"
-        />
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.2 }}
-          transition={{ duration: 2, delay: 1.5 }}
-          className="absolute bottom-20 left-20 w-24 h-24 bg-gradient-to-r from-green-500 to-green-700 rounded-full blur-xl"
-        />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             {t.title}
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             {language === 'th' 
-              ? 'เทรดคู่สกุลเงินยอดนิยมด้วยสเปรดต่ำและความเร็วสูง'
-              : 'Trade popular currency pairs with low spreads and high speed'
+              ? 'เทรดคู่สกุลเงินยอดนิยมด้วยสเปรดต่ำและความเร็วสูง พร้อมเครื่องมือวิเคราะห์ขั้นสูง'
+              : 'Trade popular currency pairs with low spreads and high speed, powered by advanced analytics'
             }
           </p>
         </motion.div>
@@ -371,9 +263,9 @@ const ForexCards = ({ language }) => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="flex justify-center mb-12"
+          className="flex justify-center mb-8"
         >
-          <div className="bg-gradient-to-r from-green-400 to-green-500 rounded-2xl p-1 shadow-lg">
+          <div className="bg-gray-100 rounded-lg p-1">
             <div className="flex space-x-1">
               {Object.entries(t.categories).map(([key, label]) => (
                 <button
@@ -383,10 +275,10 @@ const ForexCards = ({ language }) => {
                     setCurrentSlide(0);
                     setIsAutoPlaying(false);
                   }}
-                  className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
                     activeCategory === key
-                      ? 'bg-black text-white shadow-lg'
-                      : 'text-black hover:bg-black/10'
+                      ? 'bg-red-600 text-white'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-white'
                   }`}
                 >
                   {label}
@@ -401,16 +293,16 @@ const ForexCards = ({ language }) => {
           {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 w-12 h-12 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white transition-colors duration-200 shadow-lg"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5" />
           </button>
           
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 w-12 h-12 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white transition-colors duration-200 shadow-lg"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5" />
           </button>
 
           {/* Cards Container */}
@@ -429,32 +321,32 @@ const ForexCards = ({ language }) => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: index * 0.1 }}
                         viewport={{ once: true }}
-                        className="bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 border border-gray-600/30 hover:border-red-500/40 transition-all duration-300 group relative overflow-hidden shadow-xl hover:shadow-2xl"
+                        className="bg-white rounded-lg p-6 border border-gray-200 hover:border-red-300 transition-colors duration-200 group relative shadow-sm hover:shadow-md"
                       >
               {/* Card Header */}
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center">
                     <span className="text-white font-bold text-sm">
                       {pair.symbol.split('/')[0].slice(0, 2)}
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-white font-bold text-lg tracking-wide">{pair.symbol}</h3>
-                    <p className="text-gray-400 text-sm font-medium">{pair.name}</p>
+                    <h3 className="text-gray-900 font-semibold text-lg">{pair.symbol}</h3>
+                    <p className="text-gray-600 text-sm">{pair.name}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-white font-bold text-xl tracking-tight">${pair.price}</p>
-                  <div className={`flex items-center space-x-2 ${
-                    pair.trend === 'up' ? 'text-green-400' : 'text-yellow-400'
+                  <p className="text-gray-900 font-bold text-xl">${pair.price}</p>
+                  <div className={`flex items-center space-x-1 ${
+                    pair.trend === 'up' ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {pair.trend === 'up' ? (
-                      <TrendingUp className="w-5 h-5" />
+                      <TrendingUp className="w-4 h-4" />
                     ) : (
-                      <TrendingDown className="w-5 h-5" />
+                      <TrendingDown className="w-4 h-4" />
                     )}
-                    <span className="text-sm font-semibold">
+                    <span className="text-sm font-medium">
                       {pair.changePercent}
                     </span>
                   </div>
@@ -462,7 +354,7 @@ const ForexCards = ({ language }) => {
               </div>
 
               {/* Mini Chart */}
-              <div className="mb-6 h-20 bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl p-3 relative overflow-hidden border border-gray-600/20">
+              <div className="mb-4 h-16 bg-gray-50 rounded-lg p-3 relative overflow-hidden border border-gray-200">
                 <svg className="w-full h-full" viewBox="0 0 100 60">
                   <defs>
                     <linearGradient id={`gradient-${pair.id}`} x1="0%" y1="0%" x2="0%" y2="100%">
@@ -480,7 +372,7 @@ const ForexCards = ({ language }) => {
                   </defs>
                   
                   {/* Grid lines */}
-                  <g stroke="rgba(255,255,255,0.1)" strokeWidth="0.5">
+                  <g stroke="rgba(0,0,0,0.1)" strokeWidth="0.5">
                     <line x1="0" y1="20" x2="100" y2="20"/>
                     <line x1="0" y1="40" x2="100" y2="40"/>
                     <line x1="25" y1="0" x2="25" y2="60"/>
@@ -513,20 +405,20 @@ const ForexCards = ({ language }) => {
                 </svg>
                 
                 {/* Chart overlay info */}
-                <div className="absolute top-1 right-2 text-xs text-gray-400 font-medium">
+                <div className="absolute top-2 right-3 text-xs text-slate-500 font-semibold">
                   {pair.trend === 'up' ? '↗' : '↘'}
                 </div>
               </div>
 
-              {/* Card Footer */}
-              <div className="flex items-center justify-between pt-2 border-t border-gray-600/30">
-                <div className="text-gray-400 text-sm">
-                  <span className="text-gray-500">24H Vol: </span>
-                  <span className="text-white font-semibold">{pair.volume}</span>
+              {/* Premium Card Footer */}
+              <div className="flex items-center justify-between pt-4 border-t border-slate-200/50">
+                <div className="text-slate-600 text-sm">
+                  <span className="text-slate-500">24H Vol: </span>
+                  <span className="text-slate-900 font-semibold">{pair.volume}</span>
                 </div>
-                <div className="text-gray-400 text-sm">
-                  <span className="text-gray-500">Spread: </span>
-                  <span className="text-green-400 font-semibold">0.8 pips</span>
+                <div className="text-slate-600 text-sm">
+                  <span className="text-slate-500">Spread: </span>
+                  <span className="text-red-600 font-semibold">0.8 pips</span>
                 </div>
               </div>
 
@@ -540,8 +432,8 @@ const ForexCards = ({ language }) => {
             </motion.div>
           </div>
 
-          {/* Slide Indicators */}
-          <div className="flex justify-center mt-8 space-x-2">
+          {/* Premium Slide Indicators */}
+          <div className="flex justify-center mt-12 space-x-3">
             {Array.from({ length: totalSlides }).map((_, index) => (
               <button
                 key={index}
@@ -549,10 +441,10 @@ const ForexCards = ({ language }) => {
                   setCurrentSlide(index);
                   setIsAutoPlaying(false);
                 }}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-4 h-4 rounded-full transition-all duration-300 ${
                   index === currentSlide 
-                    ? 'bg-red-500 scale-125' 
-                    : 'bg-gray-600 hover:bg-gray-500'
+                    ? 'bg-gradient-to-r from-red-600 to-red-700 scale-125 shadow-lg shadow-red-500/25' 
+                    : 'bg-slate-300 hover:bg-slate-400'
                 }`}
               />
             ))}

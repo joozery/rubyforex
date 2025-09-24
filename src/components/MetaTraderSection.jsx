@@ -38,16 +38,65 @@ const MetaTraderSection = ({ language }) => {
   const t = content[language];
 
   const handleDownload = () => {
-    toast({
-      title: "📱 Download MT5",
-      description: "MetaTrader 5 download will be available soon!"
-    });
+    // Detect device type
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // For mobile, redirect to app stores
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      if (isIOS) {
+        window.open('https://apps.apple.com/app/metatrader-5/id413251709', '_blank');
+      } else {
+        window.open('https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5', '_blank');
+      }
+    } else {
+      // For PC, show download through browser
+      toast({
+        title: "💻 Download MT5",
+        description: "MT5 will be downloaded through your browser"
+      });
+      // You can add actual download link here
+      window.open('https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5setup.exe', '_blank');
+    }
   };
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-gray-900 via-black to-red-900 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 opacity-20">
+    <section className="py-24 px-4 bg-gradient-to-br from-red-900 via-slate-900 to-blue-900 relative overflow-hidden">
+      {/* Premium Background Effects */}
+      <div className="absolute inset-0">
+        {/* Sophisticated Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.03]">
+          <svg className="w-full h-full" viewBox="0 0 100 100">
+            <defs>
+              <pattern id="mtGrid" width="25" height="25" patternUnits="userSpaceOnUse">
+                <path d="M 25 0 L 0 0 0 25" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#mtGrid)" className="text-blue-400"/>
+          </svg>
+        </div>
+        
+        {/* Floating Color Accents */}
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 0.1, scale: 1 }}
+            transition={{ duration: 2, delay: 0.5 }}
+            className="absolute top-20 left-20 w-44 h-44 bg-gradient-to-br from-blue-500/30 to-blue-600/20 rounded-full blur-3xl"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 0.08, scale: 1 }}
+            transition={{ duration: 2, delay: 1 }}
+            className="absolute bottom-20 right-20 w-36 h-36 bg-gradient-to-br from-red-500/30 to-red-600/20 rounded-full blur-3xl"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 0.06, scale: 1 }}
+            transition={{ duration: 2, delay: 1.5 }}
+            className="absolute top-1/2 right-1/3 w-24 h-24 bg-gradient-to-br from-purple-500/20 to-purple-600/15 rounded-full blur-2xl"
+          />
+        </div>
         {/* Grid Pattern */}
         <div className="absolute inset-0">
           <svg className="w-full h-full" viewBox="0 0 1200 800">
@@ -118,16 +167,26 @@ const MetaTraderSection = ({ language }) => {
             viewport={{ once: true }}
             className="text-white"
           >
-            <div className="mb-8">
+            <div className="mb-10">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1, duration: 0.6 }}
+                className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-red-500/20 border border-blue-400/30 rounded-full text-blue-300 text-sm font-semibold mb-6"
+              >
+                <div className="w-2 h-2 bg-blue-400 rounded-full mr-2 animate-pulse"></div>
+                Professional Trading
+              </motion.div>
+              
               <motion.h2
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
-                className="text-4xl lg:text-6xl font-bold leading-tight mb-4"
+                className="text-5xl lg:text-7xl font-black leading-tight mb-6"
               >
                 {t.title}
                 <br />
-                <span className="bg-gradient-to-r from-orange-500 via-red-500 to-red-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-500 via-red-500 to-red-600 bg-clip-text text-transparent">
                   {t.subtitle}
                 </span>
               </motion.h2>
@@ -136,7 +195,7 @@ const MetaTraderSection = ({ language }) => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-xl text-gray-300 mb-8 leading-relaxed"
+                className="text-xl text-blue-100 mb-10 leading-relaxed font-light"
               >
                 {t.description}
               </motion.p>
@@ -278,3 +337,4 @@ const MetaTraderSection = ({ language }) => {
 };
 
 export default MetaTraderSection;
+
