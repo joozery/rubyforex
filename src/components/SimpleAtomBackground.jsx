@@ -16,10 +16,10 @@ const SimpleAtomBackground = () => {
   );
 
   const settings = {
-    atomCount: isMobile ? 15 : 25,
-    atomSpeed: 0.3,
-    atomSize: 0.08,
-    mouseInfluence: 0.2,
+    atomCount: isMobile ? 8 : 15,
+    atomSpeed: isMobile ? 0.2 : 0.3,
+    atomSize: isMobile ? 0.06 : 0.08,
+    mouseInfluence: isMobile ? 0.1 : 0.2,
     colorScheme: {
       primary: new THREE.Color(0xff0000),
       secondary: new THREE.Color(0xff4444),

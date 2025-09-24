@@ -86,8 +86,8 @@ const Header = ({ language, toggleLanguage }) => {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm"
     >
-      <div className="container mx-auto px-6 py-1">
-        <div className="flex items-center justify-between">
+      <div className="container mx-auto px-4 md:px-6 py-1">
+        <div className="flex items-center justify-between h-16 md:h-20">
           <motion.div 
             whileHover={{ scale: 1.02 }}
             className="flex items-center"
@@ -95,14 +95,15 @@ const Header = ({ language, toggleLanguage }) => {
             <img 
               src={logo} 
               alt="RubyFX Logo" 
-              className="w-20 h-20 object-contain"
+              className="w-16 h-16 md:w-20 md:h-20 object-contain"
             />
           </motion.div>
 
-          <nav className="hidden lg:flex items-center space-x-6">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-4 lg:space-x-6">
             <Link to="/products">
               <motion.button 
-                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-sm"
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs md:text-sm"
                 whileHover={{ scale: 1.02 }}
               >
                 {t.products}
@@ -110,7 +111,7 @@ const Header = ({ language, toggleLanguage }) => {
             </Link>
             <Link to="/promotions">
               <motion.button 
-                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-sm"
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs md:text-sm"
                 whileHover={{ scale: 1.02 }}
               >
                 {t.promotions}
@@ -118,7 +119,7 @@ const Header = ({ language, toggleLanguage }) => {
             </Link>
             <Link to="/news">
               <motion.button 
-                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-sm"
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs md:text-sm"
                 whileHover={{ scale: 1.02 }}
               >
                 {t.news}
@@ -126,7 +127,7 @@ const Header = ({ language, toggleLanguage }) => {
             </Link>
             <Link to="/ib-program">
               <motion.button 
-                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-sm"
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs md:text-sm"
                 whileHover={{ scale: 1.02 }}
               >
                 {t.ib}
@@ -134,7 +135,115 @@ const Header = ({ language, toggleLanguage }) => {
             </Link>
           </nav>
 
-          <div className="hidden lg:flex items-center space-x-3">
+          {/* Tablet Navigation */}
+          <nav className="hidden md:flex lg:hidden items-center space-x-3">
+            <Link to="/products">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.products}
+              </motion.button>
+            </Link>
+            <Link to="/promotions">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.promotions}
+              </motion.button>
+            </Link>
+            <Link to="/news">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.news}
+              </motion.button>
+            </Link>
+            <Link to="/ib-program">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.ib}
+              </motion.button>
+            </Link>
+          </nav>
+
+          {/* Mobile Navigation - Horizontal */}
+          <nav className="md:hidden flex items-center space-x-2 overflow-x-auto">
+            <Link to="/products">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs whitespace-nowrap px-2 py-1"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.products}
+              </motion.button>
+            </Link>
+            <Link to="/promotions">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs whitespace-nowrap px-2 py-1"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.promotions}
+              </motion.button>
+            </Link>
+            <Link to="/news">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs whitespace-nowrap px-2 py-1"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.news}
+              </motion.button>
+            </Link>
+            <Link to="/ib-program">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs whitespace-nowrap px-2 py-1"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.ib}
+              </motion.button>
+            </Link>
+          </nav>
+
+          {/* Tablet Buttons */}
+          <div className="hidden md:flex lg:hidden items-center space-x-2">
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button 
+                onClick={handleDownload} 
+                variant="outline" 
+                size="sm"
+                className="border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-full text-xs"
+              >
+                <Download className="w-3 h-3 mr-1" />
+                {t.download}
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button 
+                onClick={handleLogin} 
+                variant="ghost" 
+                size="sm"
+                className="text-gray-600 hover:bg-gray-100 transition-colors duration-200 text-xs"
+              >
+                <User className="w-3 h-3 mr-1" />
+                {t.login}
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button 
+                onClick={handleSignUp} 
+                size="sm"
+                className="bg-red-600 hover:bg-red-700 text-white transition-colors duration-200 rounded-full text-xs"
+              >
+                {t.signUp}
+              </Button>
+            </motion.div>
+          </div>
+
+          {/* Desktop Buttons */}
+          <div className="hidden lg:flex items-center space-x-2 md:space-x-3">
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button 
                 onClick={handleDownload} 
@@ -161,7 +270,7 @@ const Header = ({ language, toggleLanguage }) => {
               <Button 
                 onClick={handleSignUp} 
                 size="sm"
-                className="bg-red-600 hover:bg-red-700 text-white transition-colors duration-200 rounded-full"
+                className="bg-red-600 hover:bg-red-700 text-white transition-colors duration-200 rounded-full text-xs"
               >
                 {t.signUp}
               </Button>
@@ -178,7 +287,16 @@ const Header = ({ language, toggleLanguage }) => {
             </motion.div>
           </div>
 
-          <div className="lg:hidden flex items-center space-x-2">
+          <div className="md:hidden flex items-center space-x-2">
+            {/* Mobile Menu Button */}
+            <motion.button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Menu className="w-6 h-6 text-gray-600" />
+            </motion.button>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button 
                 onClick={toggleLanguage} 
@@ -207,20 +325,10 @@ const Header = ({ language, toggleLanguage }) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden mt-4 pb-4 border-t border-gray-200 bg-white"
+            className="md:hidden mt-4 pb-4 border-t border-gray-200 bg-white"
           >
-            <div className="flex flex-col space-y-2 mt-4">
-              <Button onClick={handleSignUp} className="bg-red-600 hover:bg-red-700 text-white w-full justify-start p-3 rounded-full">
-                {t.signUp}
-              </Button>
-              <Button onClick={handleLogin} variant="outline" className="border-gray-300 text-gray-600 hover:bg-gray-100 w-full justify-start p-3 rounded-full">
-                <User className="w-4 h-4 mr-2" />
-                {t.login}
-              </Button>
-              <Button onClick={handleDownload} variant="ghost" className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 justify-start p-3 rounded-full">
-                <Download className="w-4 h-4 mr-2" />
-                {t.download}
-              </Button>
+            {/* Mobile Navigation Menu */}
+            <div className="flex flex-col space-y-1 mt-4 mb-4">
               <Link to="/products" onClick={() => setIsMenuOpen(false)}>
                 <button className="text-gray-600 text-left py-3 hover:text-red-600 hover:bg-red-50 flex items-center transition-all duration-300 w-full">
                   <TrendingUp className="w-4 h-4 mr-2" />
@@ -234,7 +342,8 @@ const Header = ({ language, toggleLanguage }) => {
                 </button>
               </Link>
               <Link to="/news" onClick={() => setIsMenuOpen(false)}>
-                <button className="text-gray-600 text-left py-3 hover:text-red-600 hover:bg-red-50 transition-all duration-300 w-full">
+                <button className="text-gray-600 text-left py-3 hover:text-red-600 hover:bg-red-50 flex items-center transition-all duration-300 w-full">
+                  <BookOpen className="w-4 h-4 mr-2" />
                   {t.news}
                 </button>
               </Link>
@@ -244,6 +353,20 @@ const Header = ({ language, toggleLanguage }) => {
                   {t.ib}
                 </button>
               </Link>
+            </div>
+            
+            <div className="flex flex-col space-y-2 mt-4">
+              <Button onClick={handleSignUp} className="bg-red-600 hover:bg-red-700 text-white w-full justify-start p-3 rounded-full">
+                {t.signUp}
+              </Button>
+              <Button onClick={handleLogin} variant="outline" className="border-gray-300 text-gray-600 hover:bg-gray-100 w-full justify-start p-3 rounded-full">
+                <User className="w-4 h-4 mr-2" />
+                {t.login}
+              </Button>
+              <Button onClick={handleDownload} variant="ghost" className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 justify-start p-3 rounded-full">
+                <Download className="w-4 h-4 mr-2" />
+                {t.download}
+              </Button>
             </div>
           </motion.div>
         )}

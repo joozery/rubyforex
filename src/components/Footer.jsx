@@ -200,16 +200,16 @@ const Footer = ({ language }) => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 py-8 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 py-6 md:py-8 relative z-10">
         {/* Main Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8">
           {/* Company Info */}
           <div className="md:col-span-1">
             <div className="flex items-center mb-4">
               <img 
                 src={logo} 
                 alt="RubyFX Logo" 
-                className="w-16 h-16 object-contain"
+                className="w-12 h-12 md:w-16 md:h-16 object-contain"
               />
             </div>
             <p className="text-gray-600 text-sm mb-4">
@@ -235,7 +235,7 @@ const Footer = ({ language }) => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-gray-900 font-semibold mb-4">{t.products}</h4>
+            <h4 className="text-gray-900 font-semibold mb-3 md:mb-4 text-sm md:text-base">{t.products}</h4>
             <ul className="space-y-2">
               <li>
                 <button
@@ -274,23 +274,23 @@ const Footer = ({ language }) => {
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-gray-900 font-semibold mb-4">{t.newsletter}</h4>
+            <h4 className="text-gray-900 font-semibold mb-3 md:mb-4 text-sm md:text-base">{t.newsletter}</h4>
             <p className="text-gray-600 text-sm mb-4">
               {t.newsletterSubtitle}
             </p>
             
-            <form onSubmit={handleNewsletterSubmit} className="space-y-3">
+            <form onSubmit={handleNewsletterSubmit} className="space-y-2 md:space-y-3">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={t.emailPlaceholder}
-                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded text-gray-900 placeholder-gray-400 focus:outline-none focus:border-red-500 text-sm"
+                className="w-full px-3 py-2 md:py-3 bg-gray-50 border border-gray-200 rounded text-gray-900 placeholder-gray-400 focus:outline-none focus:border-red-500 text-sm"
                 required
               />
               <Button
                 type="submit"
-                className="w-full bg-red-600 hover:bg-red-700 text-white py-2 text-sm"
+                className="w-full bg-red-600 hover:bg-red-700 text-white py-2 md:py-3 text-sm"
               >
                 {t.submit}
               </Button>
