@@ -61,7 +61,7 @@ const MetaTraderSection = ({ language }) => {
   };
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-br from-red-900 via-slate-900 to-blue-900 relative overflow-hidden">
+    <section className="py-16 px-4 bg-gradient-to-br from-red-900 via-slate-900 to-blue-900 relative overflow-hidden">
       {/* Premium Background Effects */}
       <div className="absolute inset-0">
         {/* Sophisticated Grid Pattern */}
@@ -158,7 +158,7 @@ const MetaTraderSection = ({ language }) => {
       </div>
 
       <div className="container mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -167,7 +167,7 @@ const MetaTraderSection = ({ language }) => {
             viewport={{ once: true }}
             className="text-white"
           >
-            <div className="mb-10">
+            <div className="mb-6">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -182,7 +182,7 @@ const MetaTraderSection = ({ language }) => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
-                className="text-5xl lg:text-7xl font-black leading-tight mb-6"
+                className="text-3xl lg:text-5xl font-black leading-tight mb-4"
               >
                 {t.title}
                 <br />
@@ -195,7 +195,7 @@ const MetaTraderSection = ({ language }) => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-xl text-blue-100 mb-10 leading-relaxed font-light"
+                className="text-lg text-blue-100 mb-6 leading-relaxed font-light"
               >
                 {t.description}
               </motion.p>
@@ -204,12 +204,12 @@ const MetaTraderSection = ({ language }) => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
-                className="mb-8"
+                className="mb-6"
               >
                 <Button
                   onClick={handleDownload}
                   size="lg"
-                  className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white text-lg px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 flex items-center"
+                  className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white text-base px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 flex items-center"
                 >
                   <Download className="w-5 h-5 mr-2" />
                   {t.downloadButton}
@@ -252,7 +252,7 @@ const MetaTraderSection = ({ language }) => {
               <img 
                 src={rubyImage} 
                 alt="RubyFX Trading Platform" 
-                className="w-full h-auto max-w-lg mx-auto"
+                className="w-full h-auto max-w-md mx-auto"
               />
             </motion.div>
 
@@ -262,7 +262,7 @@ const MetaTraderSection = ({ language }) => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.7 }}
               viewport={{ once: true }}
-              className="absolute top-10 -left-8 w-24 h-48 bg-gray-800 rounded-2xl border-2 border-gray-600 p-2"
+              className="absolute top-8 -left-6 w-20 h-40 bg-gray-800 rounded-xl border-2 border-gray-600 p-1.5"
             >
               <div className="w-full h-full bg-black rounded-xl p-2">
                 <div className="text-white text-xs mb-2">EUR/USD</div>
@@ -276,7 +276,7 @@ const MetaTraderSection = ({ language }) => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.9 }}
               viewport={{ once: true }}
-              className="absolute top-20 -right-8 w-24 h-48 bg-gray-800 rounded-2xl border-2 border-gray-600 p-2"
+              className="absolute top-16 -right-6 w-20 h-40 bg-gray-800 rounded-xl border-2 border-gray-600 p-1.5"
             >
               <div className="w-full h-full bg-black rounded-xl p-2">
                 <div className="text-white text-xs mb-2">GBP/USD</div>
@@ -290,7 +290,7 @@ const MetaTraderSection = ({ language }) => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 1.1 }}
               viewport={{ once: true }}
-              className="absolute bottom-10 left-4 w-24 h-48 bg-gray-800 rounded-2xl border-2 border-gray-600 p-2"
+              className="absolute bottom-8 left-3 w-20 h-40 bg-gray-800 rounded-xl border-2 border-gray-600 p-1.5"
             >
               <div className="w-full h-full bg-black rounded-xl p-2">
                 <div className="text-white text-xs mb-2">USD/JPY</div>
@@ -305,9 +305,9 @@ const MetaTraderSection = ({ language }) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.3 }}
               viewport={{ once: true }}
-              className="absolute top-1/4 -left-4 w-12 h-12 bg-orange-500/20 rounded-full flex items-center justify-center"
+              className="absolute top-1/4 -left-3 w-10 h-10 bg-orange-500/20 rounded-full flex items-center justify-center"
             >
-              <TrendingUp className="w-6 h-6 text-orange-500" />
+              <TrendingUp className="w-5 h-5 text-orange-500" />
             </motion.div>
 
             <motion.div
@@ -315,9 +315,9 @@ const MetaTraderSection = ({ language }) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.5 }}
               viewport={{ once: true }}
-              className="absolute top-1/3 -right-4 w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center"
+              className="absolute top-1/3 -right-3 w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center"
             >
-              <BarChart3 className="w-6 h-6 text-red-500" />
+              <BarChart3 className="w-5 h-5 text-red-500" />
             </motion.div>
 
             <motion.div
@@ -325,9 +325,9 @@ const MetaTraderSection = ({ language }) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.7 }}
               viewport={{ once: true }}
-              className="absolute bottom-1/4 -left-2 w-12 h-12 bg-gray-500/20 rounded-full flex items-center justify-center"
+              className="absolute bottom-1/4 -left-2 w-10 h-10 bg-gray-500/20 rounded-full flex items-center justify-center"
             >
-              <Settings className="w-6 h-6 text-gray-400" />
+              <Settings className="w-5 h-5 text-gray-400" />
             </motion.div>
           </motion.div>
         </div>

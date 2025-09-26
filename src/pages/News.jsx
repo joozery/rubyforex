@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowRight, TrendingUp, TrendingDown, BarChart3, Globe, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Footer from '@/components/Footer';
 
 const News = ({ language }) => {
   const content = {
@@ -256,7 +255,6 @@ const News = ({ language }) => {
         </div>
       </section>
 
-      <Footer language={language} />
     </div>
   );
 };

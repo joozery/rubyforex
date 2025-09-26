@@ -169,8 +169,24 @@ const ForexCards = ({ language }) => {
     ? forexPairs 
     : forexPairs.filter(pair => pair.category === activeCategory);
 
-  // Update slides based on filtered data
-  const totalSlides = Math.ceil(filteredPairs.length / 4);
+  // Update slides based on filtered data - responsive cards per slide
+  const [cardsPerSlide, setCardsPerSlide] = useState(4);
+  
+  useEffect(() => {
+    const updateCardsPerSlide = () => {
+      if (window.innerWidth < 768) {
+        setCardsPerSlide(2); // Mobile: 2 cards
+      } else {
+        setCardsPerSlide(4); // Desktop: 4 cards
+      }
+    };
+    
+    updateCardsPerSlide();
+    window.addEventListener('resize', updateCardsPerSlide);
+    return () => window.removeEventListener('resize', updateCardsPerSlide);
+  }, []);
+  
+  const totalSlides = Math.ceil(filteredPairs.length / cardsPerSlide);
 
   // Auto slide functionality
   useEffect(() => {
@@ -313,117 +329,118 @@ const ForexCards = ({ language }) => {
             >
               {Array.from({ length: totalSlides }).map((_, slideIndex) => (
                 <div key={slideIndex} className="w-full flex-shrink-0">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {filteredPairs.slice(slideIndex * 4, (slideIndex + 1) * 4).map((pair, index) => (
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {filteredPairs.slice(slideIndex * cardsPerSlide, (slideIndex + 1) * cardsPerSlide).map((pair, index) => (
                       <motion.div
                         key={pair.id}
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: index * 0.1 }}
                         viewport={{ once: true }}
-                        className="bg-white rounded-lg p-6 border border-gray-200 hover:border-red-300 transition-colors duration-200 group relative shadow-sm hover:shadow-md"
+                        className="bg-white rounded-lg p-4 sm:p-5 border border-gray-100 hover:border-red-200 transition-all duration-300 group relative shadow-sm hover:shadow-md hover:-translate-y-0.5 min-h-[180px] sm:min-h-[200px]"
                       >
-              {/* Card Header */}
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">
-                      {pair.symbol.split('/')[0].slice(0, 2)}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="text-gray-900 font-semibold text-lg">{pair.symbol}</h3>
-                    <p className="text-gray-600 text-sm">{pair.name}</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-gray-900 font-bold text-xl">${pair.price}</p>
-                  <div className={`flex items-center space-x-1 ${
-                    pair.trend === 'up' ? 'text-green-600' : 'text-red-600'
-                  }`}>
-                    {pair.trend === 'up' ? (
-                      <TrendingUp className="w-4 h-4" />
-                    ) : (
-                      <TrendingDown className="w-4 h-4" />
-                    )}
-                    <span className="text-sm font-medium">
-                      {pair.changePercent}
-                    </span>
-                  </div>
-                </div>
-              </div>
+                        {/* Card Header */}
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
+                            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center shadow-sm flex-shrink-0">
+                              <span className="text-white font-bold text-xs">
+                                {pair.symbol.split('/')[0].slice(0, 2)}
+                              </span>
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <h3 className="text-gray-900 font-bold text-sm sm:text-base truncate">{pair.symbol}</h3>
+                              <p className="text-gray-500 text-xs leading-tight line-clamp-2 sm:line-clamp-none">{pair.name}</p>
+                            </div>
+                          </div>
+                          <div className="text-right min-w-0 flex-shrink-0">
+                            <p className="text-gray-900 font-bold text-sm sm:text-lg truncate">${pair.price}</p>
+                            <div className={`flex items-center justify-end space-x-1 ${
+                              pair.trend === 'up' ? 'text-green-600' : 'text-red-600'
+                            }`}>
+                              {pair.trend === 'up' ? (
+                                <TrendingUp className="w-2.5 h-2.5 sm:w-3 sm:h-3 flex-shrink-0" />
+                              ) : (
+                                <TrendingDown className="w-2.5 h-2.5 sm:w-3 sm:h-3 flex-shrink-0" />
+                              )}
+                              <span className="text-xs font-semibold truncate">
+                                {pair.changePercent}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
 
-              {/* Mini Chart */}
-              <div className="mb-4 h-16 bg-gray-50 rounded-lg p-3 relative overflow-hidden border border-gray-200">
-                <svg className="w-full h-full" viewBox="0 0 100 60">
-                  <defs>
-                    <linearGradient id={`gradient-${pair.id}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor={pair.trend === 'up' ? '#10b981' : '#f59e0b'} />
-                      <stop offset="50%" stopColor={pair.trend === 'up' ? '#059669' : '#d97706'} />
-                      <stop offset="100%" stopColor={pair.trend === 'up' ? '#047857' : '#b45309'} />
-                    </linearGradient>
-                    <filter id={`glow-${pair.id}`}>
-                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                      <feMerge> 
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  
-                  {/* Grid lines */}
-                  <g stroke="rgba(0,0,0,0.1)" strokeWidth="0.5">
-                    <line x1="0" y1="20" x2="100" y2="20"/>
-                    <line x1="0" y1="40" x2="100" y2="40"/>
-                    <line x1="25" y1="0" x2="25" y2="60"/>
-                    <line x1="50" y1="0" x2="50" y2="60"/>
-                    <line x1="75" y1="0" x2="75" y2="60"/>
-                  </g>
-                  
-                  <motion.path
-                    d={createPath(generateChartData(pair.trend))}
-                    fill="none"
-                    stroke={`url(#gradient-${pair.id})`}
-                    strokeWidth="3"
-                    filter={`url(#glow-${pair.id})`}
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 2.5, delay: index * 0.2, ease: "easeInOut" }}
-                  />
-                  
-                  <motion.circle
-                    cx="95"
-                    cy={pair.trend === 'up' ? '15' : '45'}
-                    r="4"
-                    fill={pair.trend === 'up' ? '#10b981' : '#f59e0b'}
-                    stroke="white"
-                    strokeWidth="1"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 2.5 + index * 0.2 }}
-                  />
-                </svg>
-                
-                {/* Chart overlay info */}
-                <div className="absolute top-2 right-3 text-xs text-slate-500 font-semibold">
-                  {pair.trend === 'up' ? '↗' : '↘'}
-                </div>
-              </div>
+                        {/* Mini Chart */}
+                        <div className="mb-3 sm:mb-4 h-12 sm:h-16 bg-gray-50 rounded-lg p-2 sm:p-3 relative overflow-hidden border border-gray-200">
+                          <svg className="w-full h-full" viewBox="0 0 100 50">
+                            <defs>
+                              <linearGradient id={`gradient-${pair.id}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stopColor={pair.trend === 'up' ? '#10b981' : '#ef4444'} />
+                                <stop offset="50%" stopColor={pair.trend === 'up' ? '#059669' : '#dc2626'} />
+                                <stop offset="100%" stopColor={pair.trend === 'up' ? '#047857' : '#b91c1c'} />
+                              </linearGradient>
+                              <filter id={`glow-${pair.id}`}>
+                                <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+                                <feMerge> 
+                                  <feMergeNode in="coloredBlur"/>
+                                  <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                              </filter>
+                            </defs>
+                            
+                            {/* Grid lines for better visibility */}
+                            <g stroke="rgba(0,0,0,0.1)" strokeWidth="0.5">
+                              <line x1="0" y1="12.5" x2="100" y2="12.5"/>
+                              <line x1="0" y1="25" x2="100" y2="25"/>
+                              <line x1="0" y1="37.5" x2="100" y2="37.5"/>
+                              <line x1="25" y1="0" x2="25" y2="50"/>
+                              <line x1="50" y1="0" x2="50" y2="50"/>
+                              <line x1="75" y1="0" x2="75" y2="50"/>
+                            </g>
+                            
+                            <motion.path
+                              d={createPath(generateChartData(pair.trend))}
+                              fill="none"
+                              stroke={`url(#gradient-${pair.id})`}
+                              strokeWidth="2.5"
+                              filter={`url(#glow-${pair.id})`}
+                              initial={{ pathLength: 0 }}
+                              animate={{ pathLength: 1 }}
+                              transition={{ duration: 2, delay: index * 0.1, ease: "easeInOut" }}
+                            />
+                            
+                            <motion.circle
+                              cx="95"
+                              cy={pair.trend === 'up' ? '15' : '35'}
+                              r="3"
+                              fill={pair.trend === 'up' ? '#10b981' : '#ef4444'}
+                              stroke="white"
+                              strokeWidth="1.5"
+                              initial={{ scale: 0, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
+                              transition={{ duration: 0.4, delay: 2 + index * 0.1 }}
+                            />
+                          </svg>
+                        </div>
 
-              {/* Premium Card Footer */}
-              <div className="flex items-center justify-between pt-4 border-t border-slate-200/50">
-                <div className="text-slate-600 text-sm">
-                  <span className="text-slate-500">24H Vol: </span>
-                  <span className="text-slate-900 font-semibold">{pair.volume}</span>
-                </div>
-                <div className="text-slate-600 text-sm">
-                  <span className="text-slate-500">Spread: </span>
-                  <span className="text-red-600 font-semibold">0.8 pips</span>
-                </div>
-              </div>
+                        {/* Card Footer */}
+                        <div className="flex items-center justify-between text-xs">
+                          <div className="flex items-center space-x-2 sm:space-x-4 min-w-0 flex-1">
+                            <div className="text-gray-500 min-w-0">
+                              <span className="text-gray-400">Vol: </span>
+                              <span className="text-gray-700 font-semibold truncate">{pair.volume}</span>
+                            </div>
+                            <div className="text-gray-500 min-w-0">
+                              <span className="text-gray-400">Spread: </span>
+                              <span className="text-red-600 font-semibold truncate">0.8</span>
+                            </div>
+                          </div>
+                          <div className="text-gray-400 text-sm flex-shrink-0 ml-2">
+                            {pair.trend === 'up' ? '↗' : '↘'}
+                          </div>
+                        </div>
 
                         {/* Hover Effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
                       </motion.div>
                     ))}
                   </div>

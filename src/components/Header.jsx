@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X, Globe, Download, User, BookOpen, TrendingUp, Gift, Phone, Users, Copy, FileText, Shield, Eye } from 'lucide-react';
+import { Menu, X, Globe, Download, User, BookOpen, TrendingUp, Gift, Phone, Users, Copy, FileText, Shield, Eye, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,7 @@ const Header = ({ language, toggleLanguage }) => {
 
   const content = {
     th: {
+      home: 'หน้าหลัก',
       signUp: 'สมัครสมาชิก',
       login: 'เข้าสู่ระบบ',
       download: 'ดาวน์โหลด',
@@ -28,6 +29,7 @@ const Header = ({ language, toggleLanguage }) => {
       aml: 'นโยบาย AML'
     },
     en: {
+      home: 'Home',
       signUp: 'Sign Up',
       login: 'Login',
       download: 'Download',
@@ -101,6 +103,14 @@ const Header = ({ language, toggleLanguage }) => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-4 lg:space-x-6">
+            <Link to="/">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs md:text-sm"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.home}
+              </motion.button>
+            </Link>
             <Link to="/products">
               <motion.button 
                 className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs md:text-sm"
@@ -137,6 +147,14 @@ const Header = ({ language, toggleLanguage }) => {
 
           {/* Tablet Navigation */}
           <nav className="hidden md:flex lg:hidden items-center space-x-3">
+            <Link to="/">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.home}
+              </motion.button>
+            </Link>
             <Link to="/products">
               <motion.button 
                 className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs"
@@ -171,41 +189,6 @@ const Header = ({ language, toggleLanguage }) => {
             </Link>
           </nav>
 
-          {/* Mobile Navigation - Horizontal */}
-          <nav className="md:hidden flex items-center space-x-2 overflow-x-auto">
-            <Link to="/products">
-              <motion.button 
-                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs whitespace-nowrap px-2 py-1"
-                whileHover={{ scale: 1.02 }}
-              >
-                {t.products}
-              </motion.button>
-            </Link>
-            <Link to="/promotions">
-              <motion.button 
-                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs whitespace-nowrap px-2 py-1"
-                whileHover={{ scale: 1.02 }}
-              >
-                {t.promotions}
-              </motion.button>
-            </Link>
-            <Link to="/news">
-              <motion.button 
-                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs whitespace-nowrap px-2 py-1"
-                whileHover={{ scale: 1.02 }}
-              >
-                {t.news}
-              </motion.button>
-            </Link>
-            <Link to="/ib-program">
-              <motion.button 
-                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs whitespace-nowrap px-2 py-1"
-                whileHover={{ scale: 1.02 }}
-              >
-                {t.ib}
-              </motion.button>
-            </Link>
-          </nav>
 
           {/* Tablet Buttons */}
           <div className="hidden md:flex lg:hidden items-center space-x-2">
@@ -287,16 +270,8 @@ const Header = ({ language, toggleLanguage }) => {
             </motion.div>
           </div>
 
+          {/* Mobile Controls - Clean */}
           <div className="md:hidden flex items-center space-x-2">
-            {/* Mobile Menu Button */}
-            <motion.button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Menu className="w-6 h-6 text-gray-600" />
-            </motion.button>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button 
                 onClick={toggleLanguage} 
@@ -329,6 +304,12 @@ const Header = ({ language, toggleLanguage }) => {
           >
             {/* Mobile Navigation Menu */}
             <div className="flex flex-col space-y-1 mt-4 mb-4">
+              <Link to="/" onClick={() => setIsMenuOpen(false)}>
+                <button className="text-gray-600 text-left py-3 hover:text-red-600 hover:bg-red-50 flex items-center transition-all duration-300 w-full">
+                  <Home className="w-4 h-4 mr-2" />
+                  {t.home}
+                </button>
+              </Link>
               <Link to="/products" onClick={() => setIsMenuOpen(false)}>
                 <button className="text-gray-600 text-left py-3 hover:text-red-600 hover:bg-red-50 flex items-center transition-all duration-300 w-full">
                   <TrendingUp className="w-4 h-4 mr-2" />

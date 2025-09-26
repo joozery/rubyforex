@@ -4,10 +4,12 @@ import { motion } from 'framer-motion';
 
 // Components
 import Header from './components/Header';
-import HeroClean from './components/HeroClean';
+import { HeroFuturistic } from './components/blocks/hero-futuristic';
+import BrandBanner from './components/blocks/brand-banner';
+import TradingFeatures from './components/blocks/trading-features';
+import ProductsSection from './components/blocks/products-section';
 import ForexCards from './components/ForexCards';
-import Promotions from './components/Promotions';
-import News from './components/News';
+import NewsSection from './components/blocks/news-section';
 import MetaTraderSection from './components/MetaTraderSection';
 import Footer from './components/Footer';
 
@@ -40,10 +42,12 @@ function App() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <HeroClean language={language} />
+              <HeroFuturistic />
+              <BrandBanner />
+              <TradingFeatures language={language} />
+              <ProductsSection language={language} />
               <ForexCards language={language} />
-              <Promotions language={language} />
-              <News language={language} />
+              <NewsSection language={language} />
               <MetaTraderSection language={language} />
             </motion.main>
           } />

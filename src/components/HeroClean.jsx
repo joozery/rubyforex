@@ -11,13 +11,23 @@ const HeroClean = ({ language }) => {
       subtitle: 'แพลตฟอร์มเทรดดิ้งระดับโลก',
       description: 'เทรดด้วยความมั่นใจ พร้อมเครื่องมือวิเคราะห์ขั้นสูงและสเปรดต่ำ',
       cta: 'เริ่มเทรดเลย',
+      learnMore: 'เรียนรู้เพิ่มเติม',
     },
     en: {
       title: 'RubyFX',
       subtitle: 'Global Trading Platform',
       description: 'Trade with confidence using advanced analytics and low spreads',
       cta: 'Start Trading',
+      learnMore: 'Learn More',
     }
+  };
+
+  const handleStartTrading = () => {
+    window.open('https://client.rubyfxtrade.com/register/trader', '_blank');
+  };
+
+  const handleLearnMore = () => {
+    window.location.href = '/products';
   };
 
   const t = content[language];
@@ -111,15 +121,17 @@ const HeroClean = ({ language }) => {
                 className="flex flex-col sm:flex-row gap-3 md:gap-4"
               >
                 <Button
-                  className="bg-red-600 hover:bg-red-700 text-white px-6 md:px-8 py-2 md:py-3 rounded-lg font-semibold text-sm md:text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                  onClick={handleStartTrading}
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold text-sm md:text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   {t.cta}
                 </Button>
                 <Button
+                  onClick={handleLearnMore}
                   variant="outline"
-                  className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 px-6 md:px-8 py-2 md:py-3 rounded-lg font-semibold text-sm md:text-lg transition-all duration-300"
+                  className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold text-sm md:text-lg transition-all duration-300"
                 >
-                  Learn More
+                  {t.learnMore}
                 </Button>
               </motion.div>
             </motion.div>

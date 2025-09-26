@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Users, Star, TrendingUp, Shield, Award, CheckCircle, ArrowRight, Mail, Phone, User, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
-import Footer from '@/components/Footer';
 
 const IBProgram = ({ language }) => {
   const [formData, setFormData] = useState({
@@ -418,7 +417,6 @@ const IBProgram = ({ language }) => {
         </div>
       </section>
 
-      <Footer language={language} />
     </div>
   );
 };

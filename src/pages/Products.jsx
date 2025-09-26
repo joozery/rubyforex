@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, BarChart3, Globe, Users, ArrowRight, Star, Shield, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Footer from '@/components/Footer';
 
 const Products = ({ language }) => {
   const content = {
@@ -216,7 +215,6 @@ const Products = ({ language }) => {
         </div>
       </section>
 
-      <Footer language={language} />
     </div>
   );
 };

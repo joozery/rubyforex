@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Gift, Star, Trophy, Zap, ArrowRight, Clock, Users, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Footer from '@/components/Footer';
 
 const Promotions = ({ language }) => {
   const content = {
@@ -281,7 +280,6 @@ const Promotions = ({ language }) => {
         </div>
       </section>
 
-      <Footer language={language} />
     </div>
   );
 };
