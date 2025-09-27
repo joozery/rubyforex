@@ -428,6 +428,20 @@ a:focus {
   background: linear-gradient(357deg, rgba(120, 0, 0, 1) 0%, rgba(255, 125, 125, 1) 25%, rgba(255, 255, 255, 1) 60%);
 }
 
+/* 3D Sphere Styles */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* 3D Transform Styles */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
 
 
 /* Interactive 3D Object */

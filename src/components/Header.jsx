@@ -135,6 +135,14 @@ const Header = ({ language, toggleLanguage }) => {
                 {t.news}
               </motion.button>
             </Link>
+            <Link to="/about">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs md:text-sm"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.about}
+              </motion.button>
+            </Link>
             <Link to="/ib-program">
               <motion.button 
                 className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs md:text-sm"
@@ -177,6 +185,14 @@ const Header = ({ language, toggleLanguage }) => {
                 whileHover={{ scale: 1.02 }}
               >
                 {t.news}
+              </motion.button>
+            </Link>
+            <Link to="/about">
+              <motion.button 
+                className="text-gray-600 hover:text-red-600 transition-colors duration-200 font-medium text-xs"
+                whileHover={{ scale: 1.02 }}
+              >
+                {t.about}
               </motion.button>
             </Link>
             <Link to="/ib-program">
@@ -326,6 +342,12 @@ const Header = ({ language, toggleLanguage }) => {
                 <button className="text-gray-600 text-left py-3 hover:text-red-600 hover:bg-red-50 flex items-center transition-all duration-300 w-full">
                   <BookOpen className="w-4 h-4 mr-2" />
                   {t.news}
+                </button>
+              </Link>
+              <Link to="/about" onClick={() => setIsMenuOpen(false)}>
+                <button className="text-gray-600 text-left py-3 hover:text-red-600 hover:bg-red-50 flex items-center transition-all duration-300 w-full">
+                  <Shield className="w-4 h-4 mr-2" />
+                  {t.about}
                 </button>
               </Link>
               <Link to="/ib-program" onClick={() => setIsMenuOpen(false)}>

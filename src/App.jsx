@@ -18,6 +18,18 @@ import Products from './pages/Products';
 import PromotionsPage from './pages/Promotions';
 import NewsPage from './pages/News';
 import IBProgramPage from './pages/IBProgram';
+import About from './pages/About';
+
+// Admin Pages
+import AdminLoginPage from './pages/admin/AdminLoginPage';
+import AdminMain from './pages/admin/AdminMain';
+import AdminLayout from './layouts/AdminLayout';
+
+// Contexts
+import { AdminProvider } from './contexts/AdminContext';
+
+// UI Components
+import { Toaster } from '@/components/ui/toaster';
 
 function App() {
   const [language, setLanguage] = useState('th');
@@ -27,47 +39,66 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="min-h-screen bg-white">
-        <Header 
-          language={language} 
-          toggleLanguage={toggleLanguage}
-        />
-        
+    <AdminProvider>
+      <Router>
         <Routes>
-          {/* Home Page */}
-          <Route path="/" element={
-            <motion.main
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <HeroFuturistic />
-              <BrandBanner />
-              <TradingFeatures language={language} />
-              <ProductsSection language={language} />
-              <ForexCards language={language} />
-              <NewsSection language={language} />
-              <MetaTraderSection language={language} />
-            </motion.main>
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin/*" element={
+            <AdminLayout>
+              <AdminMain />
+            </AdminLayout>
           } />
           
-          {/* Products Page */}
-          <Route path="/products" element={<Products language={language} />} />
-          
-          {/* Promotions Page */}
-          <Route path="/promotions" element={<PromotionsPage language={language} />} />
-          
-          {/* News Page */}
-          <Route path="/news" element={<NewsPage language={language} />} />
-          
-          {/* IB Program Page */}
-          <Route path="/ib-program" element={<IBProgramPage language={language} />} />
+          {/* Public Routes */}
+          <Route path="/*" element={
+            <div className="min-h-screen bg-white">
+              <Header 
+                language={language} 
+                toggleLanguage={toggleLanguage}
+              />
+              
+              <Routes>
+                {/* Home Page */}
+                <Route path="/" element={
+                  <motion.main
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <HeroFuturistic />
+                    <BrandBanner />
+                    <TradingFeatures language={language} />
+                    <ProductsSection language={language} />
+                    <ForexCards language={language} />
+                    <NewsSection language={language} />
+                    <MetaTraderSection language={language} />
+                  </motion.main>
+                } />
+                
+                {/* Products Page */}
+                <Route path="/products" element={<Products language={language} />} />
+                
+                {/* Promotions Page */}
+                <Route path="/promotions" element={<PromotionsPage language={language} />} />
+                
+                {/* News Page */}
+                <Route path="/news" element={<NewsPage language={language} />} />
+                
+                {/* IB Program Page */}
+                <Route path="/ib-program" element={<IBProgramPage language={language} />} />
+                
+                {/* About Page */}
+                <Route path="/about" element={<About language={language} />} />
+              </Routes>
+              
+              <Footer language={language} />
+            </div>
+          } />
         </Routes>
-        
-        <Footer language={language} />
-      </div>
-    </Router>
+        <Toaster />
+      </Router>
+    </AdminProvider>
   );
 }
 

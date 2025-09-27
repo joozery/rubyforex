@@ -382,7 +382,7 @@ const ProductsSection = ({ language = 'th' }) => {
                     onMouseLeave={() => setHoveredProduct(null)}
                   >
                     <div className="w-72 sm:w-80 h-[420px] sm:h-[480px] overflow-visible">
-                      <div className="w-full h-full transform-style-preserve-3d transition-transform duration-300 hover:rotate-y-180 shadow-lg shadow-black/50 rounded-lg">
+                      <div className={`w-full h-full transform-style-preserve-3d transition-transform duration-700 shadow-lg shadow-black/50 rounded-lg ${hoveredProduct === productKey ? 'rotate-y-180' : ''}`}>
                         {/* Front Side */}
                         <div className="absolute inset-0 bg-gray-900 backface-hidden rounded-lg overflow-hidden">
                           <div className="absolute inset-0 p-3 sm:p-4 flex flex-col justify-between">

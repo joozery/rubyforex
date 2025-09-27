@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Gift, Star, Trophy, Zap, ArrowRight, Clock, Users, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Promotions = ({ language }) => {
+  const [adminPromotions, setAdminPromotions] = useState([]);
+
+  // Load promotions from localStorage
+  useEffect(() => {
+    const savedPromotions = localStorage.getItem('rubyfx_promotions');
+    if (savedPromotions) {
+      const parsedPromotions = JSON.parse(savedPromotions);
+      // Filter only active promotions
+      const activePromotions = parsedPromotions.filter(promo => promo.isActive);
+      setAdminPromotions(activePromotions);
+    }
+  }, []);
+
   const content = {
     th: {
       title: 'โปรโมชั่นและโบนัส',
@@ -111,7 +124,33 @@ const Promotions = ({ language }) => {
 
   const t = content[language];
 
-  const promotions = [
+  // Get icon component by name
+  const getIconComponent = (iconName) => {
+    const iconMap = {
+      'Gift': Gift,
+      'Star': Star,
+      'Trophy': Trophy,
+      'Zap': Zap,
+      'Users': Users,
+      'TrendingUp': TrendingUp
+    };
+    return iconMap[iconName] || Gift;
+  };
+
+  // Use admin promotions if available, otherwise fallback to default
+  const promotions = adminPromotions.length > 0 ? adminPromotions.map(promo => ({
+    id: promo.id,
+    title: language === 'th' ? promo.title : promo.titleEn,
+    description: language === 'th' ? promo.description : promo.descriptionEn,
+    badge: promo.badge,
+    features: promo.features,
+    icon: getIconComponent(promo.icon),
+    color: promo.color,
+    bgColor: promo.bgColor,
+    textColor: promo.textColor,
+    image: promo.image,
+    endDate: promo.endDate
+  })) : [
     {
       id: 'welcome',
       title: t.welcome.title,
@@ -222,9 +261,15 @@ const Promotions = ({ language }) => {
                     </span>
                   </div>
 
-                  <div className={`w-16 h-16 ${promo.bgColor} rounded-2xl flex items-center justify-center mb-6`}>
-                    <IconComponent className={`w-8 h-8 ${promo.textColor}`} />
-                  </div>
+                  {promo.image ? (
+                    <div className="w-16 h-16 rounded-2xl overflow-hidden mb-6">
+                      <img src={promo.image} alt={promo.title} className="w-full h-full object-cover" />
+                    </div>
+                  ) : (
+                    <div className={`w-16 h-16 ${promo.bgColor} rounded-2xl flex items-center justify-center mb-6`}>
+                      <IconComponent className={`w-8 h-8 ${promo.textColor}`} />
+                    </div>
+                  )}
                   
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
                     {promo.title}
@@ -270,7 +315,9 @@ const Promotions = ({ language }) => {
             <div className="flex items-center justify-center mb-4">
               <Clock className="w-5 h-5 text-gray-500 mr-2" />
               <span className="text-gray-600">
-                {t.validUntil} {t.endDate}
+                {t.validUntil} {adminPromotions.length > 0 && adminPromotions[0]?.endDate ? 
+                  new Date(adminPromotions[0].endDate).toLocaleDateString('th-TH') : 
+                  t.endDate}
               </span>
             </div>
             <p className="text-gray-500 text-sm">
